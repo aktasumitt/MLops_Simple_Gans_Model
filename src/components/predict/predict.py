@@ -1,0 +1,45 @@
+import torch
+import torchvision.utils as vutils
+import numpy as np
+import PIL.Image
+from src.utils import load_obj
+from src.entity.config_entity import PredictionConfig
+from src.exception.exception import ExceptionNetwork, sys
+import os
+
+class PredictionModule():
+    def __init__(self, config: PredictionConfig):
+        self.config = config
+
+    def predict_model(self, model_generator):
+        try:
+            os.makedirs(self.config.predicted_img_save_path,exist_ok=True)
+            
+            model_generator.eval()
+            random_noise = torch.randn((5, self.config.noise_size, 1, 1)).to(self.config.device)
+            
+            with torch.no_grad():
+                fake_imgs = model_generator(random_noise)
+            
+            image_paths = []
+            for i, img_tensor in enumerate(fake_imgs):
+                img_tensor=img_tensor.squeeze(0)
+                img_np = img_tensor.cpu().detach().numpy()  # (C, H, W) -> (H, W, C)
+                img_np = (img_np * 255).astype(np.uint8)  # Normalizasyonu kaldır
+                
+                img_pil = PIL.Image.fromarray(img_np)
+                img_path = os.path.join(self.config.predicted_img_save_path, f"prediction_{i}.jpg")
+                img_pil.save(img_path)
+                image_paths.append(img_path)
+            return image_paths
+        except Exception as e:
+            raise ExceptionNetwork(e, sys)
+
+    def initiate_predict(self):
+        model = load_obj(path=self.config.model_path)
+        return self.predict_model(model_generator=model)
+
+
+        
+    
+        

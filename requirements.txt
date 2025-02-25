@@ -1,0 +1,14 @@
+tqdm
+pillow
+pathlib
+python-box
+pyyaml
+mlflow
+dvc
+dvc-s3
+dagshub
+pytest
+
+ --extra-index-url https://download.pytorch.org/whl/cu121
+torch
+torchvision

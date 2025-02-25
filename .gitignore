@@ -1,0 +1,9 @@
+venv/
+logs/
+artifacts/
+datasets/
+mlruns
+__pycache__/
+results/
+prediction_images/
+callbacks/

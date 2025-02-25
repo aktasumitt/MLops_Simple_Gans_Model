@@ -1,0 +1,57 @@
+stages:
+  data_ingestion:
+    cmd: python -m src.pipeline.data_ingestion_pipeline
+    deps:
+      - src/pipeline/data_ingestion_pipeline.py
+      - src/components/data_ingestion/
+      - src/utils.py
+    outs:
+      - datasets/train/
+    
+
+  data_transformation:
+    cmd: python -m src.pipeline.data_transformation_pipeline
+    deps:
+      - datasets/
+      - src/pipeline/data_transformation_pipeline.py
+      - src/components/data_transformation/
+      - src/utils.py
+    outs:
+      - artifacts/data_transformation/train_dataset.pkl
+
+
+  model_ingestion:
+    cmd: python -m src.pipeline.model_pipeline
+    deps:
+      - src/pipeline/model_pipeline.py
+      - src/components/model/
+      - src/utils.py
+    outs:
+      - artifacts/model/generator.pkl
+      - artifacts/model/discriminator.pkl
+
+  
+  training:
+    cmd: python -m src.pipeline.training_pipeline
+    deps:
+      - src/pipeline/training_pipeline.py
+      - src/components/training/
+      - artifacts/data_transformation/train_dataset.pkl
+      - artifacts/model/generator.pkl
+      - artifacts/model/discriminator.pkl
+      - src/utils.py
+    outs:
+      - callbacks/final_model/discriminator_model.pkl
+      - callbacks/final_model/generator_model.pkl
+
+  
+  test_model:
+    cmd: python -m src.pipeline.test_pipeline
+    deps:
+      - src/pipeline/test_pipeline.py
+      - src/components/testing/
+      - callbacks/final_model/generator_model.pkl  
+      - callbacks/checkpoints/
+      - src/utils.py
+
+
