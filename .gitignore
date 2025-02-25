@@ -4,6 +4,6 @@ artifacts/
 datasets/
 mlruns
 __pycache__/
+*_py
 results/
-prediction_images/
 callbacks/checkpoints/
