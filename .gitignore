@@ -6,4 +6,4 @@ mlruns
 __pycache__/
 results/
 prediction_images/
-callbacks/
+callbacks/checkpoints/
