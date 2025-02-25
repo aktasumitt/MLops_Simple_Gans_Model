@@ -53,8 +53,8 @@ stages:
     deps:
     - path: src/components/model/
       hash: md5
-      md5: 04600aa7ef28cb124a3ec136799634ed.dir
-      size: 10281
+      md5: e0a65bf37217d7f21b8caa34c1df90ef.dir
+      size: 10284
       nfiles: 8
     - path: src/pipeline/model_pipeline.py
       hash: md5
@@ -67,11 +67,11 @@ stages:
     outs:
     - path: artifacts/model/discriminator.pkl
       hash: md5
-      md5: e32758344234bd1719001d01da1b3e22
-      size: 1498536
+      md5: 4f80c743e81dc80a1a6b6abcfaad7195
+      size: 5939123
     - path: artifacts/model/generator.pkl
       hash: md5
-      md5: bf15ae5d15c1b01f110b877edba85504
+      md5: f018e0f59f23c020c1160db35e41e53e
       size: 14322406
   training:
     cmd: python -m src.pipeline.training_pipeline
@@ -82,11 +82,11 @@ stages:
       size: 188641789
     - path: artifacts/model/discriminator.pkl
       hash: md5
-      md5: e32758344234bd1719001d01da1b3e22
-      size: 1498536
+      md5: 4f80c743e81dc80a1a6b6abcfaad7195
+      size: 5939123
     - path: artifacts/model/generator.pkl
       hash: md5
-      md5: bf15ae5d15c1b01f110b877edba85504
+      md5: f018e0f59f23c020c1160db35e41e53e
       size: 14322406
     - path: src/components/training/
       hash: md5
@@ -104,23 +104,23 @@ stages:
     outs:
     - path: callbacks/final_model/discriminator_model.pkl
       hash: md5
-      md5: 06e7dae796b7d4350925d43296288be3
-      size: 1498581
+      md5: 09dcd282cd4f597f4e7738ff65314345
+      size: 5939168
     - path: callbacks/final_model/generator_model.pkl
       hash: md5
-      md5: e62a64c5787fe622d2398557ebf312a0
+      md5: 8ac91cd28a2261b6e6f9291fbf75a240
       size: 14322499
   test_model:
     cmd: python -m src.pipeline.test_pipeline
     deps:
     - path: callbacks/checkpoints/
       hash: md5
-      md5: a577c902fd34a045d9772a8683c2fa4d.dir
-      size: 237168482
+      md5: 9729fe408029d5e8a47f88cd51115ec1.dir
+      size: 303777122
       nfiles: 5
     - path: callbacks/final_model/generator_model.pkl
       hash: md5
-      md5: e62a64c5787fe622d2398557ebf312a0
+      md5: 8ac91cd28a2261b6e6f9291fbf75a240
       size: 14322499
     - path: src/components/testing/
       hash: md5
