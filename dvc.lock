@@ -1,0 +1,137 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python -m src.pipeline.data_ingestion_pipeline
+    deps:
+    - path: src/components/data_ingestion/
+      hash: md5
+      md5: 35f8afb8919f9e5cc71ea17184f05960.dir
+      size: 2648
+      nfiles: 4
+    - path: src/pipeline/data_ingestion_pipeline.py
+      hash: md5
+      md5: 492d1f02a1bed8142bb0f5eda39b8a2c
+      size: 612
+    - path: src/utils.py
+      hash: md5
+      md5: 14cd893aa9022f111ce8bf71a5e11987
+      size: 3750
+    outs:
+    - path: datasets/train/
+      hash: md5
+      md5: ab3353d41bd7a24a20a31f29b64e3b3c.dir
+      size: 66544770
+      nfiles: 8
+  data_transformation:
+    cmd: python -m src.pipeline.data_transformation_pipeline
+    deps:
+    - path: datasets/
+      hash: md5
+      md5: 2b0c573cf57829cab12c12ddad70270c.dir
+      size: 66544770
+      nfiles: 8
+    - path: src/components/data_transformation/
+      hash: md5
+      md5: 6fe3cdca200ef5f18b3637448772a7aa.dir
+      size: 7430
+      nfiles: 6
+    - path: src/pipeline/data_transformation_pipeline.py
+      hash: md5
+      md5: 744a7cc326aee48b15157095a60e5604
+      size: 707
+    - path: src/utils.py
+      hash: md5
+      md5: 14cd893aa9022f111ce8bf71a5e11987
+      size: 3750
+    outs:
+    - path: artifacts/data_transformation/train_dataset.pkl
+      hash: md5
+      md5: 1808c8a21b6131918fe487cbea508a5e
+      size: 188641789
+  model_ingestion:
+    cmd: python -m src.pipeline.model_pipeline
+    deps:
+    - path: src/components/model/
+      hash: md5
+      md5: 04600aa7ef28cb124a3ec136799634ed.dir
+      size: 10281
+      nfiles: 8
+    - path: src/pipeline/model_pipeline.py
+      hash: md5
+      md5: 40d1b39fb783036c342d92bd0f8712ca
+      size: 515
+    - path: src/utils.py
+      hash: md5
+      md5: 14cd893aa9022f111ce8bf71a5e11987
+      size: 3750
+    outs:
+    - path: artifacts/model/discriminator.pkl
+      hash: md5
+      md5: e32758344234bd1719001d01da1b3e22
+      size: 1498536
+    - path: artifacts/model/generator.pkl
+      hash: md5
+      md5: bf15ae5d15c1b01f110b877edba85504
+      size: 14322406
+  training:
+    cmd: python -m src.pipeline.training_pipeline
+    deps:
+    - path: artifacts/data_transformation/train_dataset.pkl
+      hash: md5
+      md5: 1808c8a21b6131918fe487cbea508a5e
+      size: 188641789
+    - path: artifacts/model/discriminator.pkl
+      hash: md5
+      md5: e32758344234bd1719001d01da1b3e22
+      size: 1498536
+    - path: artifacts/model/generator.pkl
+      hash: md5
+      md5: bf15ae5d15c1b01f110b877edba85504
+      size: 14322406
+    - path: src/components/training/
+      hash: md5
+      md5: 0b14087f859ede20db1dc0f97743541d.dir
+      size: 27288
+      nfiles: 10
+    - path: src/pipeline/training_pipeline.py
+      hash: md5
+      md5: 1e1a6d4d95dc879338cb7284c8871c46
+      size: 537
+    - path: src/utils.py
+      hash: md5
+      md5: 14cd893aa9022f111ce8bf71a5e11987
+      size: 3750
+    outs:
+    - path: callbacks/final_model/discriminator_model.pkl
+      hash: md5
+      md5: 06e7dae796b7d4350925d43296288be3
+      size: 1498581
+    - path: callbacks/final_model/generator_model.pkl
+      hash: md5
+      md5: e62a64c5787fe622d2398557ebf312a0
+      size: 14322499
+  test_model:
+    cmd: python -m src.pipeline.test_pipeline
+    deps:
+    - path: callbacks/checkpoints/
+      hash: md5
+      md5: a577c902fd34a045d9772a8683c2fa4d.dir
+      size: 237168482
+      nfiles: 5
+    - path: callbacks/final_model/generator_model.pkl
+      hash: md5
+      md5: e62a64c5787fe622d2398557ebf312a0
+      size: 14322499
+    - path: src/components/testing/
+      hash: md5
+      md5: 12a9cdd26439794846738219f0773d77.dir
+      size: 4233
+      nfiles: 4
+    - path: src/pipeline/test_pipeline.py
+      hash: md5
+      md5: 503bf2ba68cac7360cf87efb4f9ace37
+      size: 487
+    - path: src/utils.py
+      hash: md5
+      md5: 14cd893aa9022f111ce8bf71a5e11987
+      size: 3750

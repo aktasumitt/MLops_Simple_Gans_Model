@@ -33,7 +33,7 @@ class Generator(nn.Module):
 
         try:
 
-            out = self.gen_conv_layer([data])
+            out = self.gen_conv_layer(data)
             
             return out
         except Exception as e:

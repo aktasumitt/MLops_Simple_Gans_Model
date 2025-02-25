@@ -27,7 +27,7 @@ class Discriminator(nn.Module):
     def forward(self,data):
         try:            
 
-            out=self.disc_layer(data,dim=1)  
+            out=self.disc_layer(data)  
             return out
         
         except Exception as e:

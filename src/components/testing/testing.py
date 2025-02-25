@@ -31,7 +31,7 @@ class TestModule():
     def initiate_testing(self):
         
         model = load_obj(path=self.config.model_path)
-        self.test_model(labels=self.config.labels, model_generator=model)
+        self.test_model(model_generator=model)
         
     
         

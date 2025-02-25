@@ -16,7 +16,6 @@ class ModelIngestion():
         )
         self.discriminator = Discriminator(
             channel_size=self.config.channel_size,
-            img_size=self.config.img_size,
         )
         
     def initiate_and_save_model(self):
