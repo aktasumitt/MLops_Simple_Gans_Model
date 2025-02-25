@@ -8,48 +8,61 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
             padding: 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 25px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid #ddd;
         }
         h1 {
-            color: #333;
+            color: #343a40;
         }
         button {
-            padding: 10px;
+            padding: 12px 20px;
             font-size: 16px;
             margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #28a745;
+            border-radius: 8px;
+            border: none;
+            background-color: #007bff;
             color: white;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
         .image-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            padding: 15px;
+            border: 3px solid #007bff;
+            border-radius: 12px;
+            background: rgba(0, 123, 255, 0.1);
         }
         img {
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
         }
         .error {
             color: red;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 16px;
         }
     </style>
 </head>

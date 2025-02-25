@@ -23,14 +23,17 @@ class PredictionModule():
             
             image_paths = []
             for i, img_tensor in enumerate(fake_imgs):
+                
+                img_tensor=(img_tensor-img_tensor.min())/(img_tensor.max()-img_tensor.min()) # normalization
                 img_tensor=img_tensor.squeeze(0)
                 img_np = img_tensor.cpu().detach().numpy()  # (C, H, W) -> (H, W, C)
-                img_np = (img_np * 255).astype(np.uint8)  # Normalizasyonu kaldır
+                img_np = (img_np*255).astype(np.uint8)
                 
                 img_pil = PIL.Image.fromarray(img_np)
                 img_path = os.path.join(self.config.predicted_img_save_path, f"prediction_{i}.jpg")
                 img_pil.save(img_path)
                 image_paths.append(img_path)
+                
             return image_paths
         except Exception as e:
             raise ExceptionNetwork(e, sys)

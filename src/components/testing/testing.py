@@ -21,6 +21,7 @@ class TestModule():
             
             grid_tensor = vutils.make_grid(fake_img, nrow=5, normalize=True, scale_each=True)
             grid_np = grid_tensor.cpu().detach().numpy().transpose(1, 2, 0)  # (C, H, W) -> (H, W, C)
+            print(grid_np.shape)
             grid_np = (grid_np * 255).astype(np.uint8)  # Normalizasyonu kaldır, uint8 formatına çevir
             grid_pil = PIL.Image.fromarray(grid_np)
             grid_pil.save(self.config.test_img_save_path)
