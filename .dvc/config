@@ -1,0 +1,3 @@
+['remote "origin"']
+    url = s3://dvc
+    endpointurl = https://dagshub.com/umitaktas/MLops_Simple_Gans_Model.s3
