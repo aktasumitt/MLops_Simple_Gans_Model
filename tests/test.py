@@ -3,6 +3,7 @@ from src.pipeline.model_pipeline import ModelPipeline
 from src.utils import load_obj
 import torch
 
+
 @pytest.fixture
 def model():
     """Model oluşturma pipeline'ını çalıştırır ve model objesini döndürür."""
