@@ -1,5 +1,5 @@
 import torch
-import PIL.Image
+import matplotlib.pyplot as plt
 from src.utils import load_obj
 from src.entity.config_entity import PredictionConfig
 from src.exception.exception import ExceptionNetwork, sys
@@ -25,11 +25,10 @@ class PredictionModule():
                 img_tensor=(img_tensor-img_tensor.min())/(img_tensor.max()-img_tensor.min()) # normalization
                 img_tensor=img_tensor.squeeze(0)
                 im_denormalized = (img_tensor*255).type(torch.uint8)
-                img_np = im_denormalized.cpu().detach().numpy()  # (C, H, W) -> (H, W, C)
                 
-                img_pil = PIL.Image.fromarray(img_np)
                 img_path = os.path.join(self.config.predicted_img_save_path, f"prediction_{i}.jpg")
-                img_pil.save(img_path)
+                plt.imsave(img_path,im_denormalized,cmap="gray")
+                
                 image_paths.append(img_path)
                 
             return image_paths
