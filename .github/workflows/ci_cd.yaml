@@ -33,7 +33,7 @@ jobs:
       - name: Bağimliliklari yükle
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pytest torch matplotlib pathlib python-box pyyaml Flask pillow
 
       - name: Lint code
         run: echo "Linting repository" 
