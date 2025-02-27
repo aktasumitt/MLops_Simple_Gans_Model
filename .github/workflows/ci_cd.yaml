@@ -33,7 +33,8 @@ jobs:
       - name: Bağimliliklari yükle
         run: |
           python -m pip install --upgrade pip
-          pip install pytest torch matplotlib pathlib python-box pyyaml Flask pillow
+          pip install torch --index-url https://download.pytorch.org/whl/cpu 
+          pip install pytest matplotlib pathlib python-box pyyaml Flask pillow
 
       - name: Lint code
         run: echo "Linting repository" 

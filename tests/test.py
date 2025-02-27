@@ -10,7 +10,7 @@ def model():
     config = model_pipeline.modelconfig
     model_pipeline.run_model_creating()
     random_noise=torch.randn((1,config.noise_size,1,1))
-    return config,random_noise, load_obj("callbacks/final_model/generator_model.pkl")
+    return config,random_noise, load_obj("callbacks/final_model/generator_model.pth")
 
 
 def test_model(model):
