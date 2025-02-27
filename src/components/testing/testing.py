@@ -14,7 +14,7 @@ class TestModule():
     def test_model(self, model_generator):  # Generator
         try:
             model_generator.eval()
-            random_noise = torch.randn((20, self.config.noise_size, 1, 1)).to(self.config.device)
+            random_noise = torch.randn((20, self.config.noise_size, 1, 1))
             
             with torch.no_grad():
                 fake_img = model_generator(random_noise)

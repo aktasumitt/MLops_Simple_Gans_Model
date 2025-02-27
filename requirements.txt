@@ -8,6 +8,7 @@ dvc
 dvc-s3
 dagshub
 pytest
+Flask
 
  --extra-index-url https://download.pytorch.org/whl/cu121
 torch

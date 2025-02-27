@@ -1,0 +1,1 @@
+Tahmin edilen resimler buraya kaydedilecek

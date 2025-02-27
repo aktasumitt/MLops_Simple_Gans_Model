@@ -1,6 +1,4 @@
 import torch
-import torchvision.utils as vutils
-import numpy as np
 import PIL.Image
 from src.utils import load_obj
 from src.entity.config_entity import PredictionConfig
@@ -16,7 +14,7 @@ class PredictionModule():
             os.makedirs(self.config.predicted_img_save_path,exist_ok=True)
             
             model_generator.eval()
-            random_noise = torch.randn((5, self.config.noise_size, 1, 1)).to(self.config.device)
+            random_noise = torch.randn((5, self.config.noise_size, 1, 1))
             
             with torch.no_grad():
                 fake_imgs = model_generator(random_noise)
@@ -26,8 +24,8 @@ class PredictionModule():
                 
                 img_tensor=(img_tensor-img_tensor.min())/(img_tensor.max()-img_tensor.min()) # normalization
                 img_tensor=img_tensor.squeeze(0)
-                img_np = img_tensor.cpu().detach().numpy()  # (C, H, W) -> (H, W, C)
-                img_np = (img_np*255).astype(np.uint8)
+                im_denormalized = (img_tensor*255).type(torch.uint8)
+                img_np = im_denormalized.cpu().detach().numpy()  # (C, H, W) -> (H, W, C)
                 
                 img_pil = PIL.Image.fromarray(img_np)
                 img_path = os.path.join(self.config.predicted_img_save_path, f"prediction_{i}.jpg")

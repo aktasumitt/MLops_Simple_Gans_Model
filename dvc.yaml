@@ -27,8 +27,8 @@ stages:
       - src/components/model/
       - src/utils.py
     outs:
-      - artifacts/model/generator.pkl
-      - artifacts/model/discriminator.pkl
+      - artifacts/model/generator.pth
+      - artifacts/model/discriminator.pth
 
   
   training:
@@ -37,12 +37,12 @@ stages:
       - src/pipeline/training_pipeline.py
       - src/components/training/
       - artifacts/data_transformation/train_dataset.pkl
-      - artifacts/model/generator.pkl
-      - artifacts/model/discriminator.pkl
+      - artifacts/model/generator.pth
+      - artifacts/model/discriminator.pth
       - src/utils.py
     outs:
-      - callbacks/final_model/discriminator_model.pkl
-      - callbacks/final_model/generator_model.pkl
+      - callbacks/final_model/discriminator_model.pth
+      - callbacks/final_model/generator_model.pth
 
   
   test_model:
@@ -50,7 +50,7 @@ stages:
     deps:
       - src/pipeline/test_pipeline.py
       - src/components/testing/
-      - callbacks/final_model/generator_model.pkl  
+      - callbacks/final_model/generator_model.pth  
       - callbacks/checkpoints/
       - src/utils.py
 

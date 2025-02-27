@@ -66,7 +66,7 @@ def save_obj(data,save_path:Path):
         save_path=Path(save_path)
         
         with open(save_path, "wb") as file:
-            pickle.dump(data, file)
+            torch.save(data, file)
             
     except Exception as e:
         raise ExceptionNetwork(e,sys)
@@ -76,7 +76,7 @@ def load_obj(path:Path):
     try:    
         path=Path(path)
         with open(path, "rb") as file:
-            obj=pickle.load(file)
+            obj=torch.load(file,map_location=torch.device("cpu"),weights_only=False)
             
         return obj
     
