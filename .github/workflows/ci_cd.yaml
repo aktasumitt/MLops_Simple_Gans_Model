@@ -1,5 +1,6 @@
 name: workflow
 
+# Her pushta workflow calıssın
 on:
   push:
     branches:
@@ -7,25 +8,45 @@ on:
     paths-ignore:
       - 'README.md'
 
+# İzinler
 permissions:
   id-token: write
   contents: read
 
 jobs:
+# Kodu integrate edip github actions içinde test edecek.
   integration:
     name: Continuous Integration
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Bağimliliklari yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Lint code
-        run: echo "Linting repository"
+        run: echo "Linting repository" 
 
-      - name: Run unit tests
-        run: echo "Running unit tests"
+      - name: Testleri detayli çaliştir
+        run: |
+          pytest --disable-warnings -v test/test.py
 
-  build-and-push-ecr-image:
+      - name: Testlerin sonucu
+        run: |
+          echo "Unit testler çaliştirildi ve sonuçlar görüntülendi"
+
+
+# Kodu dockerfile ile docker image haline getir ve aws ECR'a pushla
+  Continuous-Delivery:
     name: Continuous Delivery
     needs: integration
     runs-on: ubuntu-latest
@@ -66,9 +87,9 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           
-          
+# AWS-EC2 uzerinde ECR içindeki son docker image pull et ve çalıştır          
   Continuous-Deployment:
-    needs: build-and-push-ecr-image
+    needs: Continuous-Delivery
     runs-on: self-hosted
     steps:
       - name: Checkout
