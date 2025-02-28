@@ -1,4 +1,5 @@
-## Mlops Simple GAN Model
+## Mlops Simple GAN Model with using Mlops tools and Deploy it on AWS
+- In this project, I created a custom GANs model to create MNIST dataset images. I completed the training using DVC and mlflow tools. I created an application with Flask and made the prediction here. I delivered and deployed this application to AWS with github actions to run it on Docker. I installed Docker on AWS ECR and ran it on AWS EC2.
 
 ## Check List
 - Dockerfile
